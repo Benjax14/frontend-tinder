@@ -1,0 +1,81 @@
+body{
+  background-image: url("/background.png");
+}
+
+.tinder{
+  display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto auto;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.candidato{
+  grid-column: 1fr;
+}
+
+.dog1{
+  grid-column: 1fr;
+}
+
+.dog2{
+  grid-column: 1fr;
+}
+
+@media (max-width: 768px) {
+
+  .tinder{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto auto;
+    justify-items: center;
+  }
+
+  .candidato{
+    grid-column: 1/4;
+  }
+
+  .dog1{
+    grid-column: 1/2;
+  }
+
+  .dog2{
+    grid-column: 3/4;
+  }
+    
+}
+
+.tinder h1{
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 3rem;
+}
+
+.candidato button:last-child{
+  margin-left: 1rem;
+}
+
+.dog1{
+  overflow: auto;
+  max-height: 100vh;
+}
+
+.dog2{
+  overflow: auto;
+  max-height: 100vh;
+}
+
+.candidato button{
+  border: none;
+  border-radius: 10px;
+  width: 5rem;
+  height: 2rem;
+  background-color: #1D4851;
+  color: whitesmoke;
+  cursor: pointer;
+  transition: all 300ms;
+}
+
+.candidato button:hover{
+  background-color: #9AB5BC;
+  color: black;
+}
