@@ -40,7 +40,7 @@ const Aceptados = ({ perros, funcion2 = null } ) => {
 
                     <div key={index}>
 
-                        {perro.id === perros.perr_candidato && perros.preferencia === "Aceptado" ?
+                        {perro.id === perros.perr_candidato &&
 
                             <Card sx={{ maxWidth: 400, mt: 1 }}>
 
@@ -76,7 +76,7 @@ const Aceptados = ({ perros, funcion2 = null } ) => {
 
                             </Card>
 
-                        : null }
+                        }
 
                     </div>
 
