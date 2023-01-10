@@ -18,7 +18,10 @@ function App() {
   const [perros, setPerros] = useState([]);
   const [aceptados, setAceptados] = useState([]);
   const [rechazados, setRechazados] = useState([]);
-  const [loading, setLoading] = useState(true);
+
+  const [loadingPerros, setLoadingPerros] = useState(true);
+  const [loadingAceptados, setLoadingAceptados] = useState(true);
+  const [loadingRechazados, setLoadingRechazados] = useState(true);
 
   const getPerros = async () => {
 
@@ -32,11 +35,13 @@ function App() {
     const data = await request.json();
 
     setPerros(data.interaccion);
-    setLoading(false);
+    setLoadingPerros(false);
 
   }
 
   const postAceptados = async (perros) => {
+
+    setLoadingPerros(true);
 
     const request = await fetch('http://127.0.0.1:8000/api/interaccion/AgregarInteraccion', {
       method: 'POST',
@@ -54,6 +59,8 @@ function App() {
 
   const postRechazados = async (perros) => {
 
+    setLoadingPerros(true);
+
     const request = await fetch('http://127.0.0.1:8000/api/interaccion/AgregarInteraccion', {
       method: 'POST',
       body: JSON.stringify({ "perr_interesado": 1, "perr_candidato": perros.id, "preferencia": "Rechazado" }),
@@ -68,7 +75,10 @@ function App() {
 
   }
 
-  const postOportunidad = async (perros) => {
+  const putOportunidad = async (perros) => {
+
+    setLoadingAceptados(true);
+    setLoadingRechazados(true);
 
     const request = await fetch('http://127.0.0.1:8000/api/interaccion/CambiarPreferencia/'+perros.id, {
       method: 'PUT',
@@ -83,7 +93,10 @@ function App() {
 
   }
 
-  const postArrepentidos = async (perros) => {
+  const putArrepentidos = async (perros) => {
+
+    setLoadingAceptados(true);
+    setLoadingRechazados(true);
 
     const request = await fetch('http://127.0.0.1:8000/api/interaccion/CambiarPreferencia/'+perros.id, {
       method: 'PUT',
@@ -110,6 +123,7 @@ function App() {
     const data = await request.json();
 
     setAceptados([...data.interaccion].reverse());
+    setLoadingAceptados(false);
 
   }
 
@@ -125,10 +139,15 @@ function App() {
     const data = await request.json();
 
     setRechazados([...data.interaccion].reverse());
+    setLoadingRechazados(false);
 
   }
 
   return (
+
+    <>
+
+     <h1 className='titulo'>Tinder perruno</h1>
 
     <div className='tinder'>
 
@@ -136,7 +155,7 @@ function App() {
 
         <h1>Perro candidato</h1>
 
-        {loading ? <CircularProgress /> :
+        {loadingPerros ? <CircularProgress /> :
 
           <Candidato perros={perros} funcion1={postAceptados} funcion2={postRechazados} />
 
@@ -148,13 +167,13 @@ function App() {
 
         <h1>Aceptados</h1>
 
-        {loading ? <CircularProgress /> :
+        {loadingAceptados ? <CircularProgress /> :
 
           <>
 
             {aceptados.map((aceptado, index) => (
 
-              <Aceptados key={index} perros={aceptado} funcion2={postArrepentidos} />
+              <Aceptados key={index} perros={aceptado} funcion2={putArrepentidos} />
 
             ))}
 
@@ -168,13 +187,13 @@ function App() {
 
         <h1>Rechazados</h1>
 
-        {loading ? <CircularProgress /> :
+        {loadingRechazados ? <CircularProgress /> :
 
           <>
 
             {rechazados.map((rechazado, index) => (
 
-              <Rechazados key={index} perros={rechazado} funcion1={postOportunidad} />
+              <Rechazados key={index} perros={rechazado} funcion1={putOportunidad} />
 
             ))}
 
@@ -185,6 +204,9 @@ function App() {
       </div>
 
     </div>
+
+    </>
+
   )
 }
 

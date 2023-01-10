@@ -14,7 +14,7 @@ const Candidato = ({ perros, funcion1 = null, funcion2 = null }) => {
             <CardMedia
                 component="img"
                 width="400"
-                height="230"
+                height="300"
                 image={perros.perr_imagen}
                 alt="perrito"
             />
@@ -33,11 +33,11 @@ const Candidato = ({ perros, funcion1 = null, funcion2 = null }) => {
 
             <CardActions>
 
-                <Button variant="outlined" onClick={() => funcion1(perros)}>
+                <Button variant="outlined" color="success" onClick={() => funcion1(perros)}>
                     Aceptar
                 </Button>
 
-                <Button variant="outlined" onClick={() => funcion2(perros)}>
+                <Button variant="outlined" color="error" onClick={() => funcion2(perros)}>
                     Rechazar
                 </Button>
 

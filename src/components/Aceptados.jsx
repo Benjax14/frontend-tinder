@@ -68,7 +68,7 @@ const Aceptados = ({ perros, funcion2 = null } ) => {
 
                                 <CardActions>
 
-                                    <Button variant="outlined" onClick={() => funcion2(perros)}>
+                                    <Button variant="outlined" color="error" onClick={() => funcion2(perros)}>
                                         Arrepentirse
                                     </Button>
 
